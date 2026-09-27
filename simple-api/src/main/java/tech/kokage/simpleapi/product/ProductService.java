@@ -3,6 +3,7 @@ package tech.kokage.simpleapi.product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -16,10 +17,9 @@ public class ProductService {
         return products;
     }
 
-    public Product getProduct(Long id) {
+    public Optional<Product> getProduct(Long id) {
         return products.stream()
                 .filter(product -> product.id().equals(id))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }

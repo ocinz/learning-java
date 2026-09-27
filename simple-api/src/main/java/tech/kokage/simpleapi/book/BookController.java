@@ -1,4 +1,4 @@
-package tech.kokage.simpleapi.product;
+package tech.kokage.simpleapi.book;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,24 +9,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
-public class ProductController {
-    private final ProductService productService;
-
-    public ProductController(ProductService productService){
-        this.productService = productService;
-    }
+@RequestMapping("/book")
+public class BookController {
+    private final BookService bookService;
 
     @GetMapping
-    public List<Product> getProducts(){
-        return productService.getProducts();
+    public List<Book> get(){
+        return bookService.getBooks();
+    }
+    public BookController(BookService bookService){
+        this.bookService = bookService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable Long id){
-        return productService.getProduct(id)
+    public ResponseEntity<Book> getBook(@PathVariable Long id){
+        return bookService.getBook(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(()->ResponseEntity.notFound().build());
-    }
+    }}
 
-}
+
